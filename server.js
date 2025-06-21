@@ -8,6 +8,8 @@
 
 
 // server.js
+const serverless = require("serverless-http");
+
 const express = require("express");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth.routes");
@@ -29,3 +31,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
+module.exports.handler = serverless(app);
+
+

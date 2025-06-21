@@ -37,9 +37,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: isProduction
-    ? { rejectUnauthorized: false } // required for Render
-    : false, // disable SSL locally
+   ssl: isProduction
+    ? { rejectUnauthorized: false } // Supabase / cloud DB needs SSL
+    : false, // Local dev doesn't need SSL
 });
 
 
