@@ -35,12 +35,18 @@ const { Pool } = require("pg");
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-   ssl: isProduction
-    ? { rejectUnauthorized: false } // Supabase / cloud DB needs SSL
-    : false, // Local dev doesn't need SSL
-});
+const pool = isProduction
+  ? new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    })
+  : new Pool({
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      port: parseInt(process.env.DB_PORT || "5432", 10),
+    });
 
 console.log("🌍 Running in:", process.env.NODE_ENV);
 
