@@ -11,11 +11,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth.routes");
+const cors = require("cors");
+
 
 
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 // Middlewares
 app.use(express.json());
