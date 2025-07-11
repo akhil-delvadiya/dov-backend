@@ -14,12 +14,17 @@ const authRoutes = require("./routes/auth.routes");
 const cors = require("cors");
 
 
+const corsOptions = {
+  origin: "http://localhost:3001",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
-
+app.use(cors(corsOptions));
 // Middlewares
 app.use(express.json());
 
